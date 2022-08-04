@@ -1,39 +1,62 @@
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import { FcGoogle } from 'react-icons/fc';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GoogleLogin } from '@react-oauth/google';
-import jwt_decode from "jwt-decode";
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
+import HomeScreenSVG from "../assets/svg/home_screen.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { userLogin } from "../actions/user";
 
-function ColorSchemesExample() {
+
+
+ function Welcome() {
 
   const navigate = useNavigate();
-  const responseGoogle = async(response) => {
-    const userObject = jwt_decode(response.credential);
-    if(userObject.email_verified){
-       console.log(userObject);
-       localStorage.setItem("userInfo",userObject.email);
+  const dispatch = useDispatch();
+  const userDetails = useSelector((state)=> state.userDetails);
+  const {isAuthenticated,loading,userInfo} = userDetails;
+  useEffect(()=>{
+    if(userInfo){
+      navigate('/home');
     }
+  },[userInfo,navigate]);
+
+ const responseGoogle= (res)=>{
+  dispatch(userLogin(res));
  }
- useEffect(()=>{
-  if(localStorage.getItem("userInfo"))
-    navigate('/home');
- },[navigate])
+
  
-   const responseFailure=(result)=>{
-    console.log(result);
-   }
+   
+   const background = "white";
   return (
-    <>
-     
-      <Navbar bg="primary" variant="dark">
-        <Container>
-          <Navbar.Brand href="#home">E-Classroom</Navbar.Brand>
-          <Nav className="me-auto">
-          <GoogleOAuthProvider
+       <>
+      <div className="relative w-full mx-auto bg-lightblue shadow-xl  rounded p-4 h-screen bg-cover flex flex-row justify-between sm:w-full">
+        <header
+          className={`h-20 fixed left-0 top-0 bg-${background} shadow-lg flex w-screen md:justify-between lg:justify-between xl:justify-between sm:flex-start items-center sm:h-24`}
+          style={{
+            transition: "background-color 200ms linear",
+          }}
+        >
+          <div className="ml-8 flex flex-row items-center sm:flex-col sm:ml-4">
+           
+            <p
+              className={`text-xl font-bold ${
+                background === "white" ? "text-black" : "text-white"
+              } `}
+              style={{
+                fontFamily: ["Montserrat", "sans-serif"],
+              }}
+            >
+             EClassroom
+            </p>
+          </div>
+          <div
+            className="px-4 flex justify-between"
+            style={{
+              fontStyle: ["Sen", "sans-serif"],
+            }}
+          >
+           <GoogleOAuthProvider
      clientId={`${process.env.REACT_APP_GOOGLE_CLIENT_ID}`}>
        <GoogleLogin
           render={(renderProps) => (
@@ -47,17 +70,35 @@ function ColorSchemesExample() {
             </button>
           )}
           onSuccess={responseGoogle}
-          onFailure={responseFailure}
           cookiePolicy="single_host_origin"
         />
      </GoogleOAuthProvider>
-          </Nav>
-        </Container>
-      </Navbar>
+          </div>
+        </header>
 
-     
-    </>
+        <div
+          className="flex justify-between my-16 w-full items-center sm:flex-col"
+          style={{
+            fontFamily: ["Poppins", "sans-serif"],
+          }}
+        >
+          <div>
+            <div className="font-extrabold text-6xl my-2">
+              Managing classrooms{" "}
+            </div>
+            <div className="font-extrabold text-6xl my-2">made easy with </div>
+            <div className="text-blue font-extrabold text-6xl my-2">
+              EClassroom
+            </div>
+          </div>
+          <div className="w-1/2 sm:w-full">
+            <img src={HomeScreenSVG} alt="" />
+          </div>
+        </div>
+        </div>
+        
+    </>     
   );
 }
 
-export default ColorSchemesExample;
+export default Welcome;

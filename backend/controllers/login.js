@@ -19,25 +19,25 @@ try{
         });
        const newToken = generateToken(newUser._id);
        res.status(200).json({
-        message: {
+       
             id: newUser._id,
             email,
             name,
             picture,
             token: newToken,
-          },
+          
        });
         
     }else{
         const newToken = generateToken(user._id);
        res.status(200).json({
-        message: {
+       
             id: user._id,
             email,
             name,
             picture,
             token: newToken,
-          },
+          
        });
     }}catch(err){
         res.status(500).json(err.message);
