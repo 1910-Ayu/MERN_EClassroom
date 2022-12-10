@@ -1,9 +1,15 @@
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import {
+    USER_LOGIN_FAIL,
+    USER_LOGIN_REQUEST,
+    USER_LOGIN_SUCCESS,
+    USER_LOGOUT_REQUEST,
+  } from "./actionTypes";
 
 export const userLogin = (res)=>{
     return async(dispatch,getState)=>{
-        dispatch({type:"USER_LOGIN_REQUEST"});
+        dispatch({type:USER_LOGIN_REQUEST});
         try{
             const config = {
                 method:"POST",
@@ -14,14 +20,15 @@ export const userLogin = (res)=>{
                const data =await axios.post('/api/login',{name,email,picture},config);
                
                dispatch({
-                type:"USER_LOGIN_SUCCESS",
+                type:USER_LOGIN_SUCCESS,
                 payload:data
                })
-               localStorage.setItem("userDetails",JSON.stringify(data));
+               localStorage.setItem("userDetails",JSON.stringify(getState().userDetails));
             }
         }catch(err){
+            localStorage.removeItem("userDetails");
             dispatch({
-                type:"USER_LOGIN_FAIL",
+                type:USER_LOGIN_FAIL,
                 payload:err.response.data
             })
 

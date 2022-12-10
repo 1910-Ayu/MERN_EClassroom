@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router';
 import HomeScreenSVG from "../assets/svg/home_screen.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { userLogin } from "../actions/user";
+import {Link} from 'react-router-dom';
 
 
 
@@ -16,10 +17,10 @@ import { userLogin } from "../actions/user";
   const userDetails = useSelector((state)=> state.userDetails);
   const {isAuthenticated,loading,userInfo} = userDetails;
   useEffect(()=>{
-    if(userInfo){
+    if(isAuthenticated){
       navigate('/home');
     }
-  },[userInfo,navigate]);
+  },[isAuthenticated,navigate]);
 
  const responseGoogle= (res)=>{
   dispatch(userLogin(res));
@@ -30,9 +31,9 @@ import { userLogin } from "../actions/user";
    const background = "white";
   return (
        <>
-      <div className="relative w-full mx-auto bg-lightblue shadow-xl  rounded p-4 h-screen bg-cover flex flex-row justify-between sm:w-full">
+      <div className="relative w-full mx-auto bg-lightblue shadow-xl h-screen rounded p-4  bg-cover flex flex-row justify-between sm:w-full">
         <header
-          className={`h-20 fixed left-0 top-0 bg-${background} shadow-lg flex w-screen md:justify-between lg:justify-between xl:justify-between sm:flex-start items-center sm:h-24`}
+          className={`h-20 fixed left-0 top-0 bg-${background} shadow-lg flex w-screen items-center justify-between md:justify-between lg:justify-between xl:justify-between sm:flex-start  sm:h-24`}
           style={{
             transition: "background-color 200ms linear",
           }}
@@ -40,14 +41,15 @@ import { userLogin } from "../actions/user";
           <div className="ml-8 flex flex-row items-center sm:flex-col sm:ml-4">
            
             <p
-              className={`text-xl font-bold ${
+              className={`text-2xl font-bold ${
                 background === "white" ? "text-black" : "text-white"
               } `}
               style={{
                 fontFamily: ["Montserrat", "sans-serif"],
               }}
             >
-             EClassroom
+              <Link to='/home'>
+             E-Classroom</Link>
             </p>
           </div>
           <div
@@ -95,7 +97,7 @@ import { userLogin } from "../actions/user";
             <img src={HomeScreenSVG} alt="" />
           </div>
         </div>
-        </div>
+      </div>
         
     </>     
   );

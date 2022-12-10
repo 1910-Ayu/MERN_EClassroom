@@ -24,7 +24,7 @@ module.exports.uploadFile = (file) => {
 
   return s3.upload(uploadParams).promise();
 };
-
+//get file from s3
 module.exports.downloadFile = (fileKey) => {
   const downloadParams = {
     Key: fileKey,
