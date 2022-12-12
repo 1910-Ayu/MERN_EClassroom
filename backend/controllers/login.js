@@ -18,6 +18,7 @@ try{
             picture:picture,
         });
        const newToken = generateToken(newUser._id);
+       console.log(newToken);
        res.status(200).json({
        
             id: newUser._id,

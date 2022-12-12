@@ -35,3 +35,13 @@ export const userLogin = (res)=>{
         }
     }
 }
+
+export const logoutUser = () => {
+    return (dispatch) => {
+      dispatch({
+        type: USER_LOGOUT_REQUEST,
+      });
+      localStorage.removeItem("userDetails");
+      window.location.reload();
+    };
+  };

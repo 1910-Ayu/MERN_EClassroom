@@ -12,6 +12,7 @@ const initialLoginState = localStorage.getItem("userDetails")
       isAuthenticated: false,
       loading: false,
       userInfo: null,
+      error:null,
     };
 
 const middlewares = [thunk];

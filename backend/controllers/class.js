@@ -88,6 +88,7 @@ module.exports.fetchClasses= async (req,res)=>{
           classes: userClasses,
         });
       } catch (err) {
+        console.log(err.message);
         res.status(500).send("INTERNAL_SERVER_ERROR");
       }
 };
