@@ -1,4 +1,6 @@
-import Button from "@material-tailwind/react/Button";
+import {
+  Button
+} from "@material-tailwind/react";
 import React, { useState } from "react";
 import CreateClassForm from "../CreateClassForm";
 import JoinClassForm from "../JoinClassForm";

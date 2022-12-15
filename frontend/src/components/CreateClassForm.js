@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Modal from "@material-tailwind/react/Modal";
-import ModalHeader from "@material-tailwind/react/ModalHeader";
-import ModalBody from "@material-tailwind/react/ModalBody";
-import ModalFooter from "@material-tailwind/react/ModalFooter";
-import Button from "@material-tailwind/react/Button";
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 
 import { createClass } from "../actions/class";
 import Spinner from "./UI/Spinner";
@@ -32,17 +34,17 @@ export default function CreateClassForm({
 
   return (
     <>
-      <Modal
+      <Dialog
         size="lg"
-        active={showCreateClass}
-        toggler={() => setShowCreateClass(false)}
+        open={showCreateClass}
+        handler={() => setShowCreateClass(false)}
       >
         {error && <p>{error}</p>}
-        <ModalHeader toggler={() => setShowCreateClass(false)}>
+        <DialogHeader handler={() => setShowCreateClass(false)}>
           Create class
-        </ModalHeader>
+        </DialogHeader>
 
-        <ModalBody>
+        <DialogBody>
           <form className="w-96 p-2 mb-4">
             <div className="mb-4">
               <label className="block text-gray-700 text-sm font-bold mb-2">
@@ -90,8 +92,8 @@ export default function CreateClassForm({
           ) : error ? (
             <Alert color={"red"} message={error} />
           ) : null}
-        </ModalBody>
-        <ModalFooter>
+       </DialogBody>
+        <DialogFooter>
           <Button
             color="red"
             buttonType="link"
@@ -108,8 +110,8 @@ export default function CreateClassForm({
           >
             Create
           </Button>
-        </ModalFooter>
-      </Modal>
+          </DialogFooter>
+      </Dialog>
     </>
   );
 }

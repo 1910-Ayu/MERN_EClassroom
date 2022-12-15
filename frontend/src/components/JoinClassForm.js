@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Alert from "./UI/Alert";
 
-import Modal from "@material-tailwind/react/Modal";
-import ModalHeader from "@material-tailwind/react/ModalHeader";
-import ModalBody from "@material-tailwind/react/ModalBody";
-import ModalFooter from "@material-tailwind/react/ModalFooter";
-import Button from "@material-tailwind/react/Button";
+import {
+  Button,
+  Dialog,
+  DialogHeader,
+  DialogBody,
+  DialogFooter,
+} from "@material-tailwind/react";
 
 import { joinClass } from "../actions/class";
 import Spinner from "./UI/Spinner";
@@ -25,17 +27,17 @@ export default function JoinClassForm({ showJoinClass, setShowJoinClass }) {
 
   return (
     <>
-      <Modal
+      <Dialog
         size="lg"
-        active={showJoinClass}
-        toggler={() => setShowJoinClass(false)}
+        open={showJoinClass}
+        handler={() => setShowJoinClass(false)}
       >
-        <ModalHeader toggler={() => setShowJoinClass(false)}>
+        <DialogHeader handler={() => setShowJoinClass(false)}>
           Join class
-        </ModalHeader>
+        </DialogHeader>
         <span>Ask your teacher for the class code, then enter it here.</span>
 
-        <ModalBody>
+        <DialogBody>
           <form className="w-96 p-2 mb-4">
             <div className="mb-4">
               <input
@@ -53,9 +55,9 @@ export default function JoinClassForm({ showJoinClass, setShowJoinClass }) {
           ) : error ? (
             <Alert color={"red"} message={error} />
           ) : null}
-        </ModalBody>
+        </DialogBody>
 
-        <ModalFooter>
+        <DialogFooter>
           <Button
             color="red"
             buttonType="link"
@@ -68,8 +70,8 @@ export default function JoinClassForm({ showJoinClass, setShowJoinClass }) {
           <Button color="green" onClick={onJoinHandler} ripple="light">
             Join
           </Button>
-        </ModalFooter>
-      </Modal>
+        </DialogFooter>
+      </Dialog>
     </>
   );
 }
