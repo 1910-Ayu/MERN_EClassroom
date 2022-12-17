@@ -41,6 +41,7 @@ const CreateMcq = () => {
 
   useEffect(() => {
     dispatch(fetchEnterClassDetails(classId));
+    
   }, []);
 
   const addQuestionHandler = () => {

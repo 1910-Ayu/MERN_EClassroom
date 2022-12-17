@@ -49,18 +49,20 @@ export default function AddQuestionForm({
       correctMarks,
       incorrectMarks,
     };
+    console.log(questionBody);
     setQuestions((prevQuestions) => [...prevQuestions, questionBody]);
+   
     setTotalMarks((totalMarks) => totalMarks + correctMarks);
 
     resetFields();
   };
   const addOptionsHandler = (e) => {
     e.preventDefault();
-    setOptionDesc("");
     const currentOption = {
       option: optionDesc,
       optionNumber: optionNumber,
     };
+    setOptionDesc("");
     setOptions((options) => [...options, currentOption]);
     setOptionNumber(optionNumber + 1);
   };

@@ -32,7 +32,7 @@ const CreateAssignment = () => {
     dispatch(fetchEnterClassDetails(classId));
   }, []);
   useEffect(() => {
-    if (!isAuthenticated || (createdBy && createdBy !== userInfo.id)) {
+    if (!isAuthenticated || (createdBy && createdBy !== userInfo.data.id)) {
       return navigate("/welcome");
     }
   }, [isAuthenticated, createdBy]);
