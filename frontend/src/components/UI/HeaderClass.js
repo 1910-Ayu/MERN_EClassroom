@@ -29,7 +29,7 @@ const HeaderClass = () => {
             }}
             className="sm:hidden ml-2"
           >
-            edushare
+            E-Classroom
           </p>
         </Link>
       </div>

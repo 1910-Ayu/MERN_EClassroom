@@ -34,7 +34,7 @@ const HeaderHome = () => {
               fontFamily: ["Montserrat", "sans-serif"],
             }}
           >
-            edushare
+            E-Classroom
           </p>
         </div>
         <div className="flex flex-row sm:flex-col items-center">
