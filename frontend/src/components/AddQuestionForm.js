@@ -55,6 +55,7 @@ export default function AddQuestionForm({
     setTotalMarks((totalMarks) => totalMarks + correctMarks);
 
     resetFields();
+    setShowAddQuestion(false);
   };
   const addOptionsHandler = (e) => {
     e.preventDefault();
@@ -74,13 +75,13 @@ export default function AddQuestionForm({
         open={showAddQuestion}
         handler={() => {
           setShowAddQuestion(false);
-          resetFields();
+          
         }}
       >
         <DialogHeader
           handler={() => {
             setShowAddQuestion(false);
-            resetFields();
+            
           }}
         >
           Add question
@@ -104,12 +105,7 @@ export default function AddQuestionForm({
               </label>
             </div>
 
-            <div
-              className="my-4"
-              onChange={(e) => {
-                setCorrectOption(parseInt(e.target.value));
-              }}
-            >
+           
               {options.length > 0 &&
                 options.map((option) => {
                   return (
@@ -120,7 +116,16 @@ export default function AddQuestionForm({
                     />
                   );
                 })}
-            </div>
+                <div className="flex h-10 justify-between  w-full sm:flex-col sm:items-center sm:h-20 sm:w-80">
+                <input
+                  className="w-full shadow appearance-none border rounded w-full py-2 px-3 mx-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  type="text"
+                  placeholder="correct oprtion"
+                  value={correctOption}
+                  onChange={(e) => setCorrectOption(e.target.value)}
+                />
+                </div>
+            
             <div className="flex h-10 justify-between  w-full sm:flex-col sm:items-center sm:h-20 sm:w-80">
               <input
                 className="w-full shadow appearance-none border rounded w-full py-2 px-3 mx-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

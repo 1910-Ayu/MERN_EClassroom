@@ -1,5 +1,6 @@
 import { Disclosure } from "@headlessui/react";
-import { ChevronUpIcon } from "@heroicons/react/solid";
+
+
 
 export default function QuestionContainer({
   questionBody,
@@ -21,11 +22,7 @@ export default function QuestionContainer({
                     {questionBody}
                   </span>
                 </span>
-                <ChevronUpIcon
-                  className={`${
-                    open ? "transform rotate-180" : ""
-                  } w-5 h-5 text-purple-500`}
-                />
+               
               </Disclosure.Button>
               <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500 flex flex-row justify-between">
                 <div>
