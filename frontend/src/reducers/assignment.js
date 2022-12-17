@@ -64,8 +64,8 @@ export const fetchAssignmentsReducer = (
     case FETCH_ASSIGNMENTS_SUCCESS:
       return {
         loading: false,
-        quizzes: [...action.payload.quizzes],
-        assignments: [...action.payload.assignments],
+        quizzes: action.payload.quizzes,
+        assignments: action.payload.assignments,
       };
     case FETCH_ASSIGNMENTS_FAIL:
       return {

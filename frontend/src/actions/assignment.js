@@ -69,7 +69,7 @@ export const fetchAssignments = (classId) => {
         `/api/quiz/fetch/all/${classId}`,
         config
       );
-
+          
       dispatch({
         type: FETCH_ASSIGNMENTS_SUCCESS,
         payload: {

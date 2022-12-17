@@ -5,7 +5,6 @@ import { fetchEnterClassDetails } from "../actions/class";
 import Announcement from "../components/UI/Announcement";
 import Banner from "../components/UI/Banner";
 import BannerSVG from "../assets/svg/online_class.svg";
-import {Button} from "@material-tailwind/react";
 import { fetchAnnouncements } from "../actions/announcement";
 import Spinner from "../components/UI/Spinner";
 import Alert from "../components/UI/Alert";
@@ -19,9 +18,7 @@ const EnterClass = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const [roomId, setRoomId] = useState("");
-
-  const { loading, error, announcements } = useSelector(
+  const { loadinga, errora, announcements } = useSelector(
     (state) => state.fetchAnnouncements
   );
   const { isAuthenticated, userInfo } = useSelector(
@@ -49,17 +46,11 @@ const EnterClass = () => {
   }, []);
 
   useEffect(() => {
-    if (createdBy && createdBy !== userInfo.data.id)
+    if (createdBy && createdBy !== userInfo.id)
       dispatch(fetchPendingTasks(classId));
   }, [createdBy, userInfo, classId]);
 
-  const joinMeetScreen = () => {
-    if (roomId) navigate(`/join/meet?roomId=${roomId}`);
-  };
-
-  const createMeetScreen = () => {
-    navigate("/join/meet");
-  };
+  
   return (
     <div>
       <Banner
@@ -71,38 +62,8 @@ const EnterClass = () => {
       <div className="flex flex-row justify-around p-6 sm:flex-col sm:p-2">
         <div className="flex flex-col">
           <div className="flex flex-col items-center shadow-lg p-6 bg-white h-56 rounded-lg sm:mb-4 mb-2 sm:w-80 sm:mx-auto">
-            <div className="flex flex-col items-center">
-              <input
-                className="w-full shadow appearance-none border rounded my-2 py-2 px-3 mx-4 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                type="text"
-                placeholder="Enter meet id"
-                value={roomId}
-                onChange={(e) => setRoomId(e.target.value)}
-              />
-              <Button
-                color="yellow"
-                ripple="light"
-                onClick={joinMeetScreen}
-                buttonType="outline"
-                className="w-48"
-              >
-                Join meet
-              </Button>
-            </div>
-            <p>OR</p>
-            <div className="w-full flex justify-center">
-              <Button
-                color="yellow"
-                ripple="light"
-                onClick={createMeetScreen}
-                buttonType="outline"
-                className="w-48"
-              >
-                Create new meet
-              </Button>
-            </div>
-          </div>
-          {createdBy && createdBy !== userInfo.id && (
+            
+          {createdBy && createdBy !== userInfo.data.id && (
             <div
               className="flex flex-col items-start  shadow-lg p-6 bg-white  rounded-lg sm:mb-4 sm:w-80 sm:mx-auto "
               style={{
@@ -117,8 +78,7 @@ const EnterClass = () => {
               >
                 Pending tasks
               </h1>
-
-              <div className="flex flex-col">
+               <div className="flex flex-col">
                 {fetchPendingLoading ? (
                   <div
                     className="flex items-center items-center justify-center mx-auto w-full"
@@ -165,13 +125,13 @@ const EnterClass = () => {
           {isAuthenticated && <Announcement />}
 
           <div className="flex flex-col p-4 sm:p-0">
-            {loading ? (
+            {loadinga ? (
               <div className="my-4">
                 <Spinner />
               </div>
-            ) : error ? (
+            ) : errora ? (
               <div className="w-4/5 mx-auto">
-                <Alert color="red" message={error} />
+                <Alert color="red" message={errora} />
               </div>
             ) : (
               announcements &&
@@ -205,6 +165,7 @@ const EnterClass = () => {
           )}
         </div>
       </div>
+    </div>
     </div>
   );
 };

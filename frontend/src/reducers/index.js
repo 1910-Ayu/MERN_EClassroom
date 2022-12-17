@@ -40,11 +40,13 @@ export default combineReducers({
   fetchAnnouncements: fetchAnnouncementsReducer,
   createNewAnnouncement: createNewAnnouncementReducer,
   deleteAnnouncement: deleteAnnouncementReducer,
+  //nn
   assignmentDetails: fetchAssignmentsReducer,
   enterClassDetails: fetchEnterClassDetailsReducer,
   createQuiz: createQuizReducer,
   createAssignment: createAssignmentReducer,
   fetchQuiz: fetchQuizReducer,
+  //nn
   fetchAssignment: fetchAssignmentReducer,
   fetchPendingTasks: fetchPendingTasksReducer,
   submitQuiz: submitQuizReducer,
