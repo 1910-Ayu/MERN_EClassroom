@@ -1,7 +1,4 @@
 import { Disclosure } from "@headlessui/react";
-
-
-
 export default function QuestionContainer({
   questionBody,
   options,
